@@ -1,7 +1,11 @@
-#ifndef MAINWINDOW_HPP
-#define MAINWINDOW_HPP
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMenuBar>
+#include <QToolBar>
+#include <QStatusBar>
+#include "dashboardwidget.hpp"
 
 class MainWindow : public QMainWindow
 {
@@ -9,6 +13,14 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+
+private:
+    void createMenuBar();
+    void createToolBar();
+    void createStatusBar();
+    
+    DashboardWidget* dashboardWidget;
 };
 
-#endif // MAINWINDOW_HPP
+#endif // MAINWINDOW_H
+
