@@ -2,35 +2,54 @@
 #define DASHBOARDWIDGET_H
 
 #include <QWidget>
-#include <QGridLayout>
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QComboBox>
 #include <QLabel>
-#include <QtCharts>
+#include <QStackedWidget>
+#include <QTableWidget> 
 
-class DashboardCard : public QWidget
-{
-    Q_OBJECT
-
-public:
-    explicit DashboardCard(const QString& title, 
-                            const QString& status, 
-                            QWidget *parent = nullptr);
-
-private:
-    QColor getStatusColor(const QString& status);
-};
 
 class DashboardWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit DashboardWidget(QWidget *parent = nullptr);
+    DashboardWidget(QWidget *parent = nullptr);
+
+signals:
+    void languageChanged(const QString &language);
+
+private slots:
+    void handleNavigation();
+    void handleLanguageChanged(const QString &language);
+    void loadCsvData();
 
 private:
-    void setupLayout();
-    QChartView* createPollutantChart();
-    QChartView* createComplianceChart();
+    QTableWidget* dataTable;
+    QWidget* dataPage;
+    QVBoxLayout* mainLayout;
+    QHBoxLayout* navBarLayout;
+    QStackedWidget* stackedWidget;
+    QHBoxLayout* footerLayout;
+
+    QLabel* titleLabel;
+    QComboBox* languageSelector;
+
+    QPushButton* dataPageButton;
+    QPushButton* pollutantOverviewButton;
+    QPushButton* popsButton;
+    QPushButton* litterIndicatorsButton;
+    QPushButton* fluorinatedCompoundsButton;
+    QPushButton* complianceDashboardButton;
+
+    QLabel* userLabel;
+    QLabel* helpLabel;
+    QLabel* creditsLabel;
+    
+    QWidget* createDataPage();
+    QWidget* createDummyPage(const QString& pageTitle);
 };
 
 #endif // DASHBOARDWIDGET_H
-
